@@ -100,24 +100,6 @@ class QrcodeReaderViewState extends State<QrcodeReaderView>
     _controller.stopCamera();
   }
 
-  Future<bool> setFlashlight() async {
-    openFlashlight = await _controller.setFlashlight();
-    setState(() {});
-    return openFlashlight;
-  }
-
-  Future _scanImage() async {
-    stopScan();
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    if (image == null) {
-      startScan();
-      return;
-    }
-    final rest = await FlutterQrReader.imgScan(image);
-    await widget.onScan(rest);
-    startScan();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Material(
